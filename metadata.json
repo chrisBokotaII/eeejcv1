@@ -1,0 +1,5 @@
+{
+  "name": "ÉGLISE ÉVANGILE ÉTERNEL DE JESUS CHRIST (EEEJC)",
+  "description": "A modern, welcoming, and responsive website for ÉGLISE ÉVANGILE ÉTERNEL DE JESUS CHRIST (EEEJC), featuring service times, ministries, events, and online giving.",
+  "requestFramePermissions": ["geolocation"]
+}
