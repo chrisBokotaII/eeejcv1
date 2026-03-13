@@ -47,7 +47,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-bold text-white">{t('contact.phone')}</h4>
-                      <p className="text-white/60">(555) 123-4567</p>
+                      <p className="text-white/60">{t('contact.phoneValue')}</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-6">
@@ -56,7 +56,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-bold text-white">{t('contact.email')}</h4>
-                      <p className="text-white/60">hello@gracecommunity.church</p>
+                      <p className="text-white/60">{t('contact.emailValue')}</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-6">

@@ -11,7 +11,7 @@ export default function Pastors() {
       role: t('home.pastorRole'),
       focus: t('pastors.staff.benjamin.focus'),
       bio: t('pastors.staff.benjamin.bio'),
-      img: 'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772288428/EEEJC/fdtrgnhteoovg5gufrjc.jpg',
+      img: 'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772707365/EEEJC/suite/wqpdfzugxy1vhhgtzhkv.jpg',
       socials: { twitter: '#', instagram: '#', facebook: '#' }
     },
     {
@@ -51,7 +51,7 @@ export default function Pastors() {
       role: t('pastors.staff.lyza.focus'),
       focus: t('pastors.staff.lyza.focus'),
       bio: t('pastors.staff.lyza.bio'),
-      img: 'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527887/EEEJC/eeejs/vlag8s3umdnd0k0ekm2w.jpg',
+      img: 'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527886/EEEJC/eeejs/b11xcjgwylxzcyyejd61.jpg',
       socials: { instagram: '#' }
     },
     {
@@ -106,7 +106,7 @@ export default function Pastors() {
               <div className="relative">
                 <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-church-gold rounded-3xl z-0"></div>
                 <img
-                  src="https://res.cloudinary.com/dokqf9kg6/image/upload/v1772289061/EEEJC/y9mvmjj1p9hbxajm887v.jpg"
+                  src="https://res.cloudinary.com/dokqf9kg6/image/upload/v1772708457/EEEJC/suite/blzgltmy3ndlb3wl3s1c.jpg"
                   alt={t('home.pastorName')}
                   className="relative z-10 w-full rounded-3xl shadow-2xl object-cover aspect-[4/5]"
                   referrerPolicy="no-referrer"

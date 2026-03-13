@@ -8,6 +8,10 @@ import Contact from './pages/Contact';
 import Visit from './pages/Visit';
 import Pastors from './pages/Pastors';
 import Gallery from './pages/Gallery';
+import Events from './pages/Events';
+import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -31,6 +35,16 @@ export default function App() {
             <Route path="/visit" element={<Visit />} />
             <Route path="/pastors" element={<Pastors />} />
             <Route path="/gallery" element={<Gallery />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/login" element={<Login />} />
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } 
+            />
           </Routes>
         </main>
         <Footer />

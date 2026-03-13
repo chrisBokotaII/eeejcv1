@@ -1,22 +1,32 @@
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 
+interface GalleryImage {
+  _id: string;
+  url: string;
+  caption?: string;
+}
+
 export default function Gallery() {
   const { t } = useTranslation();
+  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const images = [
-    'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527886/EEEJC/eeejs/cdkxhpla5z7km243ykz0.jpg',
-    'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527886/EEEJC/eeejs/i9ed6vot2tmbede5nmzt.jpg',
-    'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527887/EEEJC/eeejs/okujtir2na4djuzk49d9.jpg',
-    'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527888/EEEJC/eeejs/zcbupoisxi8syamjpt4b.jpg',
-    'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527888/EEEJC/eeejs/hkixelgjmh5oadcp3wn3.jpg',
-    'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527888/EEEJC/eeejs/oue4abfqghf1eyisnonh.jpg',
-    'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527889/EEEJC/eeejs/mrqgls7mlzuqrpeunbes.jpg',
-    'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527889/EEEJC/eeejs/yzkzlbpxbnz5u5nfwc1e.jpg',
-    'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527890/EEEJC/eeejs/mph2qau1w9iixhdq9ad5.jpg',
-    'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527890/EEEJC/eeejs/fd7v0envbpv1q10nln6g.jpg',
-    'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527891/EEEJC/eeejs/eboj3of8wp38ar90g9rg.jpg',
-  ];
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const res = await fetch('/api/gallery');
+        const data = await res.json();
+        setImages(data);
+      } catch (err) {
+        console.error('Error fetching gallery:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchGallery();
+  }, []);
 
   return (
     <div className="bg-church-cream min-h-screen">
@@ -39,26 +49,37 @@ export default function Gallery() {
       {/* Gallery Grid */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-            {images.map((src, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                className="break-inside-avoid rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 group"
-              >
-                <img
-                  src={src}
-                  alt={`Gallery image ${idx + 1}`}
-                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                  referrerPolicy="no-referrer"
-                  loading="lazy"
-                />
-              </motion.div>
-            ))}
-          </div>
+          {loading ? (
+            <div className="text-center py-12 text-church-olive text-xl">Loading gallery...</div>
+          ) : images.length > 0 ? (
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+              {images.map((img, idx) => (
+                <motion.div
+                  key={img._id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.05 }}
+                  className="break-inside-avoid rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 group"
+                >
+                  <img
+                    src={img.url}
+                    alt={img.caption || `Gallery image ${idx + 1}`}
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                    referrerPolicy="no-referrer"
+                    loading="lazy"
+                  />
+                  {img.caption && (
+                    <div className="p-4 bg-white">
+                      <p className="text-church-olive font-medium">{img.caption}</p>
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 text-gray-500 text-xl">No photos in the gallery yet.</div>
+          )}
         </div>
       </section>
     </div>

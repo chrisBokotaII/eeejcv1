@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Heart, MapPin, Calendar, ArrowRight } from 'lucide-react';
+import { Heart, MapPin, Calendar, ArrowRight, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 
@@ -14,10 +14,10 @@ export default function Home() {
           <img
             src="https://res.cloudinary.com/dokqf9kg6/image/upload/v1772288842/EEEJC/oz2vwqpq5osihtmcqvl6.jpg"
             alt="Church Hero"
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover opacity-60"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-church-cream/90 via-church-cream/60 to-church-cream"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-church-cream/60 via-church-cream/30 to-church-cream"></div>
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
@@ -90,6 +90,100 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Detailed Weekly Schedule Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="text-church-gold font-medium uppercase tracking-widest text-sm"
+            >
+              {t('visit.schedule')}
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-4xl md:text-5xl font-serif font-bold text-church-olive mt-4"
+            >
+              {t('footer.serviceTimes')}
+            </motion.h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Tuesday */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-church-cream p-8 rounded-3xl border border-church-olive/5 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-church-gold/10 rounded-2xl flex items-center justify-center text-church-gold">
+                  <Clock size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-white text-lg">{t('footer.tuesday')}</h4>
+                  <p className="text-church-gold font-medium">08:30 - 10:00</p>
+                </div>
+              </div>
+              <p className="text-white/70 leading-relaxed">
+                {t('footer.tuesdayTime')}
+              </p>
+            </motion.div>
+
+            {/* Thursday */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-church-cream p-8 rounded-3xl border border-church-olive/5 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-church-gold/10 rounded-2xl flex items-center justify-center text-church-gold">
+                  <Clock size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-white text-lg">{t('footer.thursday')}</h4>
+                  <p className="text-church-gold font-medium">14:45 - 17:00</p>
+                </div>
+              </div>
+              <p className="text-white/70 leading-relaxed">
+                {t('footer.thursdayTime')}
+              </p>
+            </motion.div>
+
+            {/* Sunday */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-church-olive p-8 rounded-3xl border border-white/5 shadow-xl text-white"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-church-gold/20 rounded-2xl flex items-center justify-center text-church-gold">
+                  <Calendar size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-white text-lg">{t('footer.sunday')}</h4>
+                  <p className="text-church-gold font-medium">08:30 - 10:30</p>
+                </div>
+              </div>
+              <p className="text-white/70 leading-relaxed">
+                {t('footer.sundayTime')}
+              </p>
+              <div className="mt-8 pt-6 border-t border-white/10">
+                <Link to="/visit" className="btn-primary w-full py-3 text-center block">
+                  {t('nav.planVisit')}
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Pastor's Welcome */}
       <section className="py-24 bg-church-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -97,7 +191,7 @@ export default function Home() {
             <div className="w-full lg:w-1/2 relative">
               <div className="absolute -top-4 -left-4 w-full h-full border-2 border-church-gold rounded-2xl z-0"></div>
               <img
-                src="https://res.cloudinary.com/dokqf9kg6/image/upload/v1772289061/EEEJC/y9mvmjj1p9hbxajm887v.jpg"
+                src="https://res.cloudinary.com/dokqf9kg6/image/upload/v1772707365/EEEJC/suite/q4kthrguoms330hv3zfe.jpg"
                 alt={t('home.pastorName')}
                 className="relative z-10 w-full rounded-2xl shadow-2xl object-cover aspect-[4/5]"
                 referrerPolicy="no-referrer"

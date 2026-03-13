@@ -70,16 +70,25 @@ export default function Visit() {
                     <p className="text-white/60">{t('visit.addressFull')}</p>
                   </div>
                 </div>
-                <div className="p-8 bg-church-cream rounded-2xl border border-white/5">
-                  <h4 className="font-bold mb-4 flex items-center gap-2 text-white">
-                    <Calendar size={20} className="text-church-gold" />
+                <div className="p-8 bg-church-cream rounded-3xl border border-white/5 shadow-inner">
+                  <h4 className="font-serif text-2xl font-bold mb-8 flex items-center gap-3 text-white">
+                    <Calendar size={28} className="text-church-gold" />
                     {t('visit.schedule')}
                   </h4>
-                  <ul className="space-y-2 text-white/70">
-                    <li className="flex justify-between"><span>{t('visit.scheduleItems.tuesday')}</span></li>
-                    <li className="flex justify-between"><span>{t('visit.scheduleItems.thursday')}</span></li>
-                    <li className="flex justify-between"><span>{t('visit.scheduleItems.sunday')}</span></li>
-                  </ul>
+                  <div className="space-y-6">
+                    <div className="flex justify-between items-center p-4 bg-church-olive/50 rounded-2xl border border-white/5">
+                      <span className="font-medium text-white">{t('footer.tuesday')}</span>
+                      <span className="text-church-gold font-bold">08:30 - 10:00</span>
+                    </div>
+                    <div className="flex justify-between items-center p-4 bg-church-olive/50 rounded-2xl border border-white/5">
+                      <span className="font-medium text-white">{t('footer.thursday')}</span>
+                      <span className="text-church-gold font-bold">14:45 - 17:00</span>
+                    </div>
+                    <div className="flex justify-between items-center p-4 bg-church-gold/10 rounded-2xl border border-church-gold/20">
+                      <span className="font-bold text-white">{t('footer.sunday')}</span>
+                      <span className="text-church-gold font-bold">08:30 - 10:30</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <Link to="/contact" className="btn-primary inline-flex items-center gap-2">

@@ -10,6 +10,7 @@ const resources = {
         about: 'À Propos',
         pastors: 'Pasteurs',
         gallery: 'Galerie',
+        events: 'Événements',
         contact: 'Contact',
         planVisit: 'Planifier une Visite'
       },
@@ -38,7 +39,7 @@ const resources = {
       },
       about: {
         title: 'Notre Histoire et Mission',
-        desc: 'L\'ÉGLISE ÉVANGILE ÉTERNEL DE JESUS CHRIST (EEEJC) a été fondée en 1995 avec une vision simple : aimer Dieu et aimer les gens.',
+        desc: 'L\'ÉGLISE ÉVANGILE ÉTERNEL DE JESUS CHRIST (EEEJC) a été fondée le 25 Mai 2025 avec une vision simple : aimer Dieu et aimer les gens.',
         mission: 'Notre Mission',
         missionDesc: 'D’annoncer aux habitants de la terre, à toute nation, à toute tribu, à toute langue, et à tout peuple la bonne Évangile qui est l’Evangile éternel.',
         vision: 'Notre Vision',
@@ -49,6 +50,37 @@ const resources = {
       gallery: {
         title: 'Galerie de l\'Église',
         desc: 'Découvrez les moments forts de notre communauté, nos services et nos événements à travers ces images.'
+      },
+      events: {
+        title: 'Événements à Venir',
+        desc: 'Rejoignez-nous pour nos prochains rassemblements, conférences et événements spéciaux.',
+        learnMore: 'En savoir plus',
+        stayUpdated: 'Restez Informé',
+        newsletterDesc: 'Inscrivez-vous à notre newsletter pour recevoir les dernières nouvelles et mises à jour sur nos événements.',
+        subscribe: 'S\'abonner',
+        items: {
+          thanksgiving: {
+            title: 'Culte d\'Action de Grâce',
+            date: 'Chaque Dimanche',
+            time: '08:30 - 10:30',
+            location: 'Sanctuaire Principal',
+            desc: 'Un moment spécial pour rendre grâce à Dieu pour ses bienfaits dans nos vies et notre communauté.'
+          },
+          bibleStudy: {
+            title: 'Étude Biblique Approfondie',
+            date: 'Chaque Jeudi',
+            time: '14:45 - 17:00',
+            location: 'Salle de Conférence',
+            desc: 'Plongez plus profondément dans la Parole de Dieu avec nos pasteurs et enseignants.'
+          },
+          youthNight: {
+            title: 'Soirée de la Jeunesse',
+            date: 'Dernier Vendredi du Mois',
+            time: '17:00 - 19:00',
+            location: 'Centre Communautaire',
+            desc: 'Un moment de louange, de partage et de communion fraternelle pour les jeunes de notre église.'
+          }
+        }
       },
       pastors: {
         title: 'Notre Direction',
@@ -109,9 +141,11 @@ const resources = {
         infoTitle: 'Informations de contact',
         location: 'Notre Emplacement',
         phone: 'Numéro de téléphone',
+        phoneValue: '+243 990 484 694, +243 993 271 985',
         email: 'Adresse e-mail',
+        emailValue: 'benjiwems1@gmail.com',
         hours: 'Heures de bureau',
-        hoursDesc: 'Lun - Jeu : 9h00 - 16h00',
+        hoursDesc: 'Mardi, Jeudi, Samedi, Dimanche',
         followUs: 'Suivez-nous',
         formTitle: 'Envoyer un message',
         firstName: 'Prénom',
@@ -199,6 +233,7 @@ const resources = {
         about: 'About',
         pastors: 'Pastors',
         gallery: 'Gallery',
+        events: 'Events',
         contact: 'Contact',
         planVisit: 'Plan a Visit'
       },
@@ -227,7 +262,7 @@ const resources = {
       },
       about: {
         title: 'Our Story & Mission',
-        desc: 'ÉGLISE ÉVANGILE ÉTERNEL DE JESUS CHRIST (EEEJC) was founded in 1995 with a simple vision: to love God and love people.',
+        desc: 'ÉGLISE ÉVANGILE ÉTERNEL DE JESUS CHRIST (EEEJC) was founded on May 25, 2025, with a simple vision: to love God and love people.',
         mission: 'Our Mission',
         missionDesc: 'To announce to the inhabitants of the earth, to every nation, tribe, language, and people the good Gospel which is the eternal Gospel.',
         vision: 'Our Vision',
@@ -238,6 +273,37 @@ const resources = {
       gallery: {
         title: 'Church Gallery',
         desc: 'Discover the highlights of our community, our services, and our events through these images.'
+      },
+      events: {
+        title: 'Upcoming Events',
+        desc: 'Join us for our upcoming gatherings, conferences, and special events.',
+        learnMore: 'Learn More',
+        stayUpdated: 'Stay Updated',
+        newsletterDesc: 'Sign up for our newsletter to receive the latest news and updates about our events.',
+        subscribe: 'Subscribe',
+        items: {
+          thanksgiving: {
+            title: 'Thanksgiving Service',
+            date: 'Every Sunday',
+            time: '8:30 AM - 10:30 AM',
+            location: 'Main Sanctuary',
+            desc: 'A special time to give thanks to God for His blessings in our lives and our community.'
+          },
+          bibleStudy: {
+            title: 'In-depth Bible Study',
+            date: 'Every Thursday',
+            time: '2:45 PM - 5:00 PM',
+            location: 'Conference Room',
+            desc: 'Dive deeper into God\'s Word with our pastors and teachers.'
+          },
+          youthNight: {
+            title: 'Youth Night',
+            date: 'Last Friday of the Month',
+            time: '5:00 PM - 7:00 PM',
+            location: 'Community Center',
+            desc: 'A time of worship, sharing, and fellowship for the youth of our church.'
+          }
+        }
       },
       pastors: {
         title: 'Our Leadership',
@@ -298,9 +364,11 @@ const resources = {
         infoTitle: 'Contact Information',
         location: 'Our Location',
         phone: 'Phone Number',
+        phoneValue: '+243 990 484 694, +243 993 271 985',
         email: 'Email Address',
+        emailValue: 'benjiwems1@gmail.com',
         hours: 'Office Hours',
-        hoursDesc: 'Mon - Thu: 9:00 AM - 4:00 PM',
+        hoursDesc: 'Tuesday, Thursday, Saturday, Sunday',
         followUs: 'Follow Us',
         formTitle: 'Send a Message',
         firstName: 'First Name',

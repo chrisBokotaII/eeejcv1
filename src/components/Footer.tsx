@@ -39,6 +39,7 @@ export default function Footer() {
               <li><Link to="/about" className="hover:text-white transition-colors">{t('footer.ourStory')}</Link></li>
               <li><Link to="/pastors" className="hover:text-white transition-colors">{t('footer.ourPastors')}</Link></li>
               <li><Link to="/gallery" className="hover:text-white transition-colors">{t('nav.gallery')}</Link></li>
+              <li><Link to="/events" className="hover:text-white transition-colors">{t('nav.events')}</Link></li>
               <li><Link to="/contact" className="hover:text-white transition-colors">{t('footer.contactUs')}</Link></li>
               <li><Link to="/visit" className="hover:text-white transition-colors">{t('footer.planVisit')}</Link></li>
             </ul>
@@ -73,11 +74,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center space-x-3">
                 <Phone size={18} className="text-church-gold shrink-0" />
-                <span>(555) 123-4567</span>
+                <span>{t('contact.phoneValue')}</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={18} className="text-church-gold shrink-0" />
-                <span>hello@gracecommunity.church</span>
+                <span>{t('contact.emailValue')}</span>
               </li>
             </ul>
           </div>

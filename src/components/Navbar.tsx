@@ -13,7 +13,9 @@ export default function Navbar() {
     { name: t('nav.about'), path: '/about' },
     { name: t('nav.pastors'), path: '/pastors' },
     { name: t('nav.gallery'), path: '/gallery' },
+    { name: t('nav.events'), path: '/events' },
     { name: t('nav.contact'), path: '/contact' },
+    { name: 'Dashboard', path: '/dashboard' },
   ];
 
   const toggleLanguage = () => {
@@ -60,10 +62,6 @@ export default function Navbar() {
               <Languages size={18} />
               {i18n.language === 'fr' ? 'EN' : 'FR'}
             </button>
-
-            <Link to="/visit" className="btn-primary py-2 px-5 text-sm">
-              {t('nav.planVisit')}
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -108,15 +106,6 @@ export default function Navbar() {
                   {link.name}
                 </NavLink>
               ))}
-              <div className="pt-4">
-                <Link
-                  to="/visit"
-                  onClick={() => setIsOpen(false)}
-                  className="block w-full text-center btn-primary"
-                >
-                  {t('nav.planVisit')}
-                </Link>
-              </div>
             </div>
           </motion.div>
         )}

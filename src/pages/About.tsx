@@ -6,7 +6,7 @@ export default function About() {
   const { t } = useTranslation();
 
   const leaders = [
-    { name: t('pastors.staff.benjamin.name'), role: t('home.pastorRole'), img: 'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772288428/EEEJC/fdtrgnhteoovg5gufrjc.jpg' },
+    { name: t('pastors.staff.benjamin.name'), role: t('home.pastorRole'), img: 'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772707365/EEEJC/suite/wqpdfzugxy1vhhgtzhkv.jpg' },
     { name: t('pastors.staff.nadege.name'), role: t('pastors.staff.nadege.focus'), img: 'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527891/EEEJC/eeejs/g6yqabz8nlvgnx7cn6cn.jpg' },
     { name: t('pastors.staff.elie.name'), role: t('pastors.staff.elie.focus'), img: 'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527888/EEEJC/eeejs/gqqexvgrjjtbl4m6wftv.jpg' },
     { name: t('pastors.staff.heritier.name'), role: t('pastors.staff.heritier.focus'), img: 'https://res.cloudinary.com/dokqf9kg6/image/upload/v1772527885/EEEJC/eeejs/phxshmyuiq9lmnnfvdal.jpg' },
@@ -68,7 +68,7 @@ export default function About() {
               <div key={idx} className="group">
                 <div className="relative overflow-hidden rounded-2xl mb-6 aspect-[3/4]">
                   <img
-                    src={`https://picsum.photos/seed/${leader.img}/600/800`}
+                    src={leader.img}
                     alt={leader.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     referrerPolicy="no-referrer"
