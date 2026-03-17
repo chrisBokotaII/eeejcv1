@@ -1,9 +1,50 @@
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { MapPin, Phone, Mail, Clock, Send, Facebook, Instagram, Youtube } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, Facebook, Instagram, Youtube, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function Contact() {
   const { t } = useTranslation();
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    subject: t('contact.subjects.general'),
+    message: ''
+  });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    try {
+      const res = await fetch('/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message
+        })
+      });
+
+      if (res.ok) {
+        setStatus('success');
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          subject: t('contact.subjects.general'),
+          message: ''
+        });
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
+  };
 
   return (
     <div className="bg-church-cream min-h-screen">
@@ -93,56 +134,101 @@ export default function Contact() {
             {/* Contact Form */}
             <div className="bg-church-olive p-10 rounded-3xl shadow-xl border border-white/5">
               <h2 className="text-3xl font-serif font-bold mb-8 text-white">{t('contact.formTitle')}</h2>
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-white/60 uppercase tracking-widest">{t('contact.firstName')}</label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-3 bg-church-cream border border-white/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-church-gold/20 text-white"
-                      placeholder="John"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-white/60 uppercase tracking-widest">{t('contact.lastName')}</label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-3 bg-church-cream border border-white/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-church-gold/20 text-white"
-                      placeholder="Doe"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-white/60 uppercase tracking-widest">{t('contact.email')}</label>
-                  <input
-                    type="email"
-                    className="w-full px-4 py-3 bg-church-cream border border-white/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-church-gold/20 text-white"
-                    placeholder="john@example.com"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-white/60 uppercase tracking-widest">{t('contact.subject')}</label>
-                  <select className="w-full px-4 py-3 bg-church-cream border border-white/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-church-gold/20 text-white appearance-none">
-                    <option>{t('contact.subjects.general')}</option>
-                    <option>{t('contact.subjects.prayer')}</option>
-                    <option>{t('contact.subjects.volunteer')}</option>
-                    <option>{t('contact.subjects.other')}</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-white/60 uppercase tracking-widest">{t('contact.message')}</label>
-                  <textarea
-                    rows={5}
-                    className="w-full px-4 py-3 bg-church-cream border border-white/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-church-gold/20 resize-none text-white"
-                    placeholder="How can we help you?"
-                  ></textarea>
-                </div>
-                <div className="flex justify-center sm:justify-start">
-                  <button className="w-full sm:w-auto btn-primary py-4 px-12 text-lg flex items-center justify-center gap-2">
-                    {t('contact.send')} <Send size={20} />
+              
+              {status === 'success' ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="bg-church-gold/10 border border-church-gold/20 p-8 rounded-2xl text-center space-y-4"
+                >
+                  <CheckCircle2 size={48} className="text-church-gold mx-auto" />
+                  <h3 className="text-2xl font-serif font-bold text-white">Message Sent!</h3>
+                  <p className="text-white/60">Thank you for reaching out. We will get back to you soon.</p>
+                  <button 
+                    onClick={() => setStatus('idle')}
+                    className="text-church-gold font-bold hover:underline"
+                  >
+                    Send another message
                   </button>
-                </div>
-              </form>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {status === 'error' && (
+                    <div className="bg-red-500/10 border border-red-500/20 p-4 rounded-xl flex items-center gap-3 text-red-400">
+                      <AlertCircle size={20} />
+                      <span>Failed to send message. Please try again.</span>
+                    </div>
+                  )}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-white/60 uppercase tracking-widest">{t('contact.firstName')}</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.firstName}
+                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                        className="w-full px-4 py-3 bg-church-cream border border-white/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-church-gold/20 text-white"
+                        placeholder="John"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-white/60 uppercase tracking-widest">{t('contact.lastName')}</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.lastName}
+                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                        className="w-full px-4 py-3 bg-church-cream border border-white/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-church-gold/20 text-white"
+                        placeholder="Doe"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-white/60 uppercase tracking-widest">{t('contact.email')}</label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-4 py-3 bg-church-cream border border-white/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-church-gold/20 text-white"
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-white/60 uppercase tracking-widest">{t('contact.subject')}</label>
+                    <select 
+                      value={formData.subject}
+                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      className="w-full px-4 py-3 bg-church-cream border border-white/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-church-gold/20 text-white appearance-none"
+                    >
+                      <option>{t('contact.subjects.general')}</option>
+                      <option>{t('contact.subjects.prayer')}</option>
+                      <option>{t('contact.subjects.volunteer')}</option>
+                      <option>{t('contact.subjects.other')}</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-white/60 uppercase tracking-widest">{t('contact.message')}</label>
+                    <textarea
+                      rows={5}
+                      required
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full px-4 py-3 bg-church-cream border border-white/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-church-gold/20 resize-none text-white"
+                      placeholder="How can we help you?"
+                    ></textarea>
+                  </div>
+                  <div className="flex justify-center sm:justify-start">
+                    <button 
+                      type="submit"
+                      disabled={status === 'loading'}
+                      className="w-full sm:w-auto btn-primary py-4 px-12 text-lg flex items-center justify-center gap-2 disabled:opacity-50"
+                    >
+                      {status === 'loading' ? 'Sending...' : t('contact.send')} <Send size={20} />
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
           </div>
         </div>

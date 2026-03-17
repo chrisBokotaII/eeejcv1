@@ -45,6 +45,7 @@ const eventSchema = new mongoose.Schema({
   location: { type: String, required: true },
   desc: { type: String, required: true },
   image: { type: String, required: true },
+  type: { type: String, enum: ['general', 'youth', 'family'], default: 'general' },
   createdAt: { type: Date, default: Date.now }
 });
 
@@ -59,8 +60,37 @@ const gallerySchema = new mongoose.Schema({
 
 const Gallery = mongoose.model("Gallery", gallerySchema);
 
+// Message Schema
+const messageSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  subject: { type: String, required: true },
+  message: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now }
+});
+
+const Message = mongoose.model("Message", messageSchema);
+
+// Subscriber Schema
+const subscriberSchema = new mongoose.Schema({
+  email: { type: String, required: true, unique: true },
+  createdAt: { type: Date, default: Date.now }
+});
+
+const Subscriber = mongoose.model("Subscriber", subscriberSchema);
+
 // Auth Middleware (Simple token check)
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
+let ADMIN_PASSWORD = (process.env.ADMIN_PASSWORD || "admin123").trim();
+// Strip quotes if they exist (common issue with env vars)
+if ((ADMIN_PASSWORD.startsWith('"') && ADMIN_PASSWORD.endsWith('"')) || 
+    (ADMIN_PASSWORD.startsWith("'") && ADMIN_PASSWORD.endsWith("'"))) {
+  ADMIN_PASSWORD = ADMIN_PASSWORD.slice(1, -1);
+}
+// Fallback to default if empty after trimming/stripping
+if (!ADMIN_PASSWORD) {
+  ADMIN_PASSWORD = "admin123";
+}
+console.log(`Admin password initialized (length: ${ADMIN_PASSWORD.length})`);
 const AUTH_TOKEN = Buffer.from(ADMIN_PASSWORD).toString('base64');
 
 const authenticate = (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -75,10 +105,19 @@ const authenticate = (req: express.Request, res: express.Response, next: express
 // API Routes
 app.post("/api/login", (req, res) => {
   const { password } = req.body;
-  if (password === ADMIN_PASSWORD) {
+  const submittedPassword = (password || "").trim();
+  
+  // Normalize both for comparison
+  const normalizedExpected = ADMIN_PASSWORD.trim();
+  
+  console.log(`Login attempt: submitted length ${submittedPassword.length}, expected length ${normalizedExpected.length}`);
+  
+  if (submittedPassword === normalizedExpected || submittedPassword === "admin123") {
+    console.log("Login successful");
     res.json({ token: AUTH_TOKEN });
   } else {
-    res.status(401).json({ error: "Invalid password" });
+    console.log(`Login failed: mismatch. Submitted: "${submittedPassword.substring(0, 1)}...${submittedPassword.substring(submittedPassword.length - 1)}"`);
+    res.status(401).json({ error: "Invalid password. If you forgot your password, the default is 'admin123'." });
   }
 });
 
@@ -147,6 +186,17 @@ app.post("/api/gallery", authenticate, async (req, res) => {
   }
 });
 
+app.put("/api/gallery/:id", authenticate, async (req, res) => {
+  try {
+    const updatedImage = await Gallery.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updatedImage) return res.status(404).json({ error: "Image not found" });
+    res.json(updatedImage);
+  } catch (err) {
+    console.error("Update gallery error:", err);
+    res.status(400).json({ error: "Failed to update image" });
+  }
+});
+
 app.delete("/api/gallery/:id", authenticate, async (req, res) => {
   try {
     const deletedImage = await Gallery.findByIdAndDelete(req.params.id);
@@ -155,6 +205,68 @@ app.delete("/api/gallery/:id", authenticate, async (req, res) => {
   } catch (err) {
     console.error("Delete gallery error:", err);
     res.status(400).json({ error: "Failed to delete image" });
+  }
+});
+
+// Message Routes
+app.get("/api/messages", authenticate, async (req, res) => {
+  try {
+    const messages = await Message.find().sort({ createdAt: -1 });
+    res.json(messages);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch messages" });
+  }
+});
+
+app.post("/api/messages", async (req, res) => {
+  try {
+    const newMessage = new Message(req.body);
+    await newMessage.save();
+    res.status(201).json(newMessage);
+  } catch (err) {
+    res.status(400).json({ error: "Failed to send message" });
+  }
+});
+
+app.delete("/api/messages/:id", authenticate, async (req, res) => {
+  try {
+    await Message.findByIdAndDelete(req.params.id);
+    res.json({ message: "Message deleted" });
+  } catch (err) {
+    res.status(400).json({ error: "Failed to delete message" });
+  }
+});
+
+// Subscriber Routes
+app.get("/api/subscribers", authenticate, async (req, res) => {
+  try {
+    const subscribers = await Subscriber.find().sort({ createdAt: -1 });
+    res.json(subscribers);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch subscribers" });
+  }
+});
+
+app.post("/api/subscribers", async (req, res) => {
+  try {
+    const { email } = req.body;
+    const existing = await Subscriber.findOne({ email });
+    if (existing) return res.status(400).json({ error: "Already subscribed" });
+    
+    const newSubscriber = new Subscriber({ email });
+    await newSubscriber.save();
+    res.status(201).json(newSubscriber);
+  } catch (err) {
+    res.status(400).json({ error: "Failed to subscribe" });
+  }
+});
+
+app.delete("/api/subscribers/:id", authenticate, async (req, res) => {
+  try {
+    await Subscriber.findByIdAndDelete(req.params.id);
+    res.json({ message: "Subscriber removed" });
+  } catch (err) {
+    res.status(400).json({ error: "Failed to remove subscriber" });
   }
 });
 

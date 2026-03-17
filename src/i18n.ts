@@ -12,6 +12,8 @@ const resources = {
         gallery: 'Galerie',
         events: 'Événements',
         contact: 'Contact',
+        youth: 'Jeunesse',
+        family: 'Famille',
         planVisit: 'Planifier une Visite'
       },
       common: {
@@ -223,6 +225,44 @@ const resources = {
         rights: 'Tous droits réservés.',
         privacy: 'Politique de confidentialité',
         terms: 'Conditions d\'utilisation'
+      },
+      youth: {
+        title: 'Département de la Jeunesse',
+        subtitle: '2 Timothée 2:22',
+        verse: '"Fuis les passions de la jeunesse, et recherche la justice, la foi, la charité, la paix, avec ceux qui invoquent le Seigneur d\'un coeur pur."',
+        desc: 'Notre ministère de la jeunesse est dédié à équiper la prochaine génération pour qu\'elle vive avec passion pour Jésus-Christ.',
+        purpose: 'Objectif',
+        purposeDesc: 'Découvrir le plan de Dieu pour votre vie.',
+        community: 'Communauté',
+        communityDesc: 'Construire des amitiés durables.',
+        eventsTitle: 'Événements pour les Jeunes',
+        eventsDesc: 'Rejoignez-nous pour des moments de communion, de croissance et de plaisir.',
+        nightTitle: 'Soirée de la Jeunesse',
+        nightDesc: 'Chaque dernier vendredi du mois. Un temps de louange, de jeux et d\'enseignement.',
+        nightTime: 'Dernier Vendredi, 17h00',
+        studyTitle: 'Étude Biblique',
+        studyDesc: 'Plonger profondément dans la Parole de Dieu adaptée aux jeunes esprits.',
+        studyTime: 'Mercredis, 16h00',
+        socialTitle: 'Sorties Sociales',
+        socialDesc: 'Activités ludiques, sports et voyages pour renforcer la communauté.',
+        socialTime: 'Mensuel'
+      },
+      family: {
+        title: 'Famille et Mariage',
+        subtitle: 'Proverbes 22:6',
+        verse: '"Instruis l\'enfant selon la voie qu\'il doit suivre; Et quand il sera vieux, il ne s\'en détournera pas."',
+        desc: 'Nous croyons que des familles fortes construisent des églises fortes. Nous offrons des conseils et un soutien pour les mariages et la parentalité.',
+        counselingTitle: 'Conseils Conjugaux',
+        counselingDesc: 'Des conseils bibliques pour renforcer votre mariage et naviguer dans les défis de la vie.',
+        adviceTitle: 'Conseils pour la Famille',
+        adviceDesc: 'Des ressources et des conseils pour élever des enfants dans la foi et maintenir l\'harmonie familiale.',
+        supportTitle: 'Comment nous vous soutenons',
+        retreatsTitle: 'Retraites de Mariage',
+        retreatsDesc: 'Escapades annuelles axées sur le renouvellement et le renforcement du lien conjugal.',
+        workshopsTitle: 'Ateliers Parentaux',
+        workshopsDesc: 'Sessions pratiques sur l\'éducation des enfants avec des valeurs bibliques dans un monde moderne.',
+        oneOnOneTitle: 'Tête-à-tête',
+        oneOnOneDesc: 'Sessions privées avec notre équipe pastorale pour des conseils spécifiques et la prière.'
       }
     }
   },
@@ -235,6 +275,8 @@ const resources = {
         gallery: 'Gallery',
         events: 'Events',
         contact: 'Contact',
+        youth: 'Youth',
+        family: 'Family',
         planVisit: 'Plan a Visit'
       },
       common: {
@@ -446,6 +488,44 @@ const resources = {
         rights: 'All rights reserved.',
         privacy: 'Privacy Policy',
         terms: 'Terms of Service'
+      },
+      youth: {
+        title: 'Youth Department',
+        subtitle: '2 Timothy 2:22',
+        verse: '"Flee the evil desires of youth and pursue righteousness, faith, love and peace, along with those who call on the Lord out of a pure heart."',
+        desc: 'Our youth ministry is dedicated to equipping the next generation to live with passion for Jesus Christ.',
+        purpose: 'Purpose',
+        purposeDesc: 'Discovering God\'s plan for your life.',
+        community: 'Community',
+        communityDesc: 'Building lasting friendships.',
+        eventsTitle: 'Youth Events',
+        eventsDesc: 'Join us for times of fellowship, growth, and fun.',
+        nightTitle: 'Youth Night',
+        nightDesc: 'Every last Friday of the month. A time for worship, games, and teaching.',
+        nightTime: 'Last Friday, 5:00 PM',
+        studyTitle: 'Bible Study',
+        studyDesc: 'Diving deep into the Word of God tailored for young minds.',
+        studyTime: 'Wednesdays, 4:00 PM',
+        socialTitle: 'Social Outings',
+        socialDesc: 'Fun activities, sports, and trips to build community.',
+        socialTime: 'Monthly'
+      },
+      family: {
+        title: 'Family & Marriage',
+        subtitle: 'Proverbs 22:6',
+        verse: '"Start children off on the way they should go, and even when they are old they will not turn from it."',
+        desc: 'We believe strong families build strong churches. We offer guidance and support for marriages and parenting.',
+        counselingTitle: 'Marriage Counseling',
+        counselingDesc: 'Biblical guidance to strengthen your marriage and navigate life\'s challenges.',
+        adviceTitle: 'Family Advice',
+        adviceDesc: 'Resources and advice for raising children in faith and maintaining family harmony.',
+        supportTitle: 'How We Support You',
+        retreatsTitle: 'Marriage Retreats',
+        retreatsDesc: 'Annual getaways focused on renewing and strengthening the marital bond.',
+        workshopsTitle: 'Parenting Workshops',
+        workshopsDesc: 'Practical sessions on raising children with biblical values in a modern world.',
+        oneOnOneTitle: 'One-on-One',
+        oneOnOneDesc: 'Private sessions with our pastoral team for specific guidance and prayer.'
       }
     }
   }

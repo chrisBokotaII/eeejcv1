@@ -14,6 +14,8 @@ export default function Navbar() {
     { name: t('nav.pastors'), path: '/pastors' },
     { name: t('nav.gallery'), path: '/gallery' },
     { name: t('nav.events'), path: '/events' },
+    { name: t('nav.youth'), path: '/youth' },
+    { name: t('nav.family'), path: '/family' },
     { name: t('nav.contact'), path: '/contact' },
     { name: 'Dashboard', path: '/dashboard' },
   ];

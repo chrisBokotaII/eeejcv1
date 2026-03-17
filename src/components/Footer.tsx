@@ -1,13 +1,75 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
   const { t } = useTranslation();
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    try {
+      const res = await fetch('/api/subscribers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      if (res.ok) {
+        setStatus('success');
+        setEmail('');
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
+  };
 
   return (
     <footer className="bg-church-olive text-white pt-16 pb-8 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Newsletter Section */}
+        <div className="bg-white/5 rounded-3xl p-8 md:p-12 mb-16 border border-white/10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-3xl font-serif font-bold mb-4">Stay Connected</h3>
+              <p className="text-white/60 text-lg">Subscribe to our newsletter to receive updates on events, sermons, and community news.</p>
+            </div>
+            <div>
+              {status === 'success' ? (
+                <div className="flex items-center gap-3 text-church-gold bg-church-gold/10 p-4 rounded-2xl border border-church-gold/20">
+                  <CheckCircle2 size={24} />
+                  <span className="font-bold">Thank you for subscribing!</span>
+                </div>
+              ) : (
+                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4">
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="flex-grow px-6 py-4 bg-church-cream/10 border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-church-gold/20 text-white placeholder:text-white/30"
+                  />
+                  <button 
+                    type="submit"
+                    disabled={status === 'loading'}
+                    className="btn-primary py-4 px-8 flex items-center justify-center gap-2 disabled:opacity-50"
+                  >
+                    {status === 'loading' ? 'Subscribing...' : 'Subscribe'} <Send size={18} />
+                  </button>
+                </form>
+              )}
+              {status === 'error' && (
+                <p className="text-red-400 text-sm mt-2">Something went wrong. Please try again.</p>
+              )}
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="space-y-4">
